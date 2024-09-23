@@ -10,6 +10,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import LeaderboardScreen from './screens/LeaderboardScreen'; // Sørg for denne sti er korrekt
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
+import RegistrationScreen from './screens/RegistrationScreen';
+import ReviewActivityScreen from './screens/ReviewActivityScreen';
 
 const firebaseConfig = {
   apiKey: "AIzaSyC2HgM_YMsQYp8Y9assdq6gXZMrbniMM7Q",
@@ -38,8 +40,9 @@ export default function App() {
         <Tab.Screen name="Forum" component={ForumScreen} />
         <Tab.Screen name="Profil" component={ProfileScreen} />
         <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
+        <Tab.Screen name="Registrering" component={RegistrationScreen} />
+        <Tab.Screen name="Anmeld Aktivitet" component={ReviewActivityScreen} />
       </Tab.Navigator>
-      <StatusBar style="auto" />
     </NavigationContainer>
   );
 }
