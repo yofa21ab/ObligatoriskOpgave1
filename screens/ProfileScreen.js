@@ -1,19 +1,26 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
-const ProfileScreen = ({ navigation }) => {
-  const points = 1200; // placeholder data
-  const badges = ['Super Reviewer', 'Top Contributor']; // placeholder data
-  
+const ProfileScreen = () => {
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    const db = getDatabase();
+    const userId = "userId123"; // Skift dette med det aktuelle bruger-id
+    const userRef = ref(db, 'users/' + userId);
+
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      setUserData(data);
+    });
+  }, []);
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Brugerens profil</Text>
-      <Text>Point: {points}</Text>
-      <Text>Badges:</Text>
-      {badges.map((badge, index) => (
-        <Text key={index}>{badge}</Text>
-      ))}
-      <Button title="Indstillinger" onPress={() => navigation.navigate('Settings')} />
+    <View>
+      <Text>Username: {userData.username}</Text>
+      <Text>Review Points: {userData.reviewPoints}</Text>
+      <Text>Badges: {userData.badges && userData.badges.join(", ")}</Text>
     </View>
   );
 };
