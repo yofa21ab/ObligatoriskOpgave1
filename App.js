@@ -2,14 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import ActivitiesScreen from './screens/ActivitiesScreen';
 import ForumScreen from './screens/ForumScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import ProfileScreen from './components/ProfileScreen';
 
-// Your web app's Firebase configuration
+// Firebase configuration
+import firebase from 'firebase/app';
+
 const firebaseConfig = {
   apiKey: "AIzaSyC2HgM_YMsQYp8Y9assdq6gXZMrbniMM7Q",
   authDomain: "obligatorisk-opgave-1.firebaseapp.com",
@@ -18,6 +19,12 @@ const firebaseConfig = {
   messagingSenderId: "751342484352",
   appId: "1:751342484352:web:b780a6a7297b6eea40df65"
 };
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // hvis det allerede er initialiseret
+}
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +40,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
