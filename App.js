@@ -9,6 +9,16 @@ import ActivitiesScreen from './screens/ActivitiesScreen';
 import ForumScreen from './screens/ForumScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC2HgM_YMsQYp8Y9assdq6gXZMrbniMM7Q",
+  authDomain: "obligatorisk-opgave-1.firebaseapp.com",
+  projectId: "obligatorisk-opgave-1",
+  storageBucket: "obligatorisk-opgave-1.appspot.com",
+  messagingSenderId: "751342484352",
+  appId: "1:751342484352:web:b780a6a7297b6eea40df65"
+};
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
