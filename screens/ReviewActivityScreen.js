@@ -1,47 +1,60 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
-import { getDatabase, ref, set, onValue } from 'firebase/database';
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { getDatabase, ref, set, get } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 
 const ReviewActivityScreen = () => {
   const [reviewText, setReviewText] = useState('');
-  const [username, setUsername] = useState('userId123'); // Skift til den aktuelle bruger-ID
+  const [userPoints, setUserPoints] = useState(0);
 
-  const handleSubmitReview = () => {
+  const handleSubmitReview = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      Alert.alert("Fejl", "Du skal være logget ind for at indsende en anmeldelse.");
+      return;
+    }
+
     const db = getDatabase();
-    const reviewId = `review_${new Date().getTime()}`; // Genererer unikt ID for anmeldelsen
 
     // Tilføj anmeldelsen
-    set(ref(db, 'reviews/' + reviewId), {
-      userId: username,
+    const reviewId = `review_${new Date().getTime()}`; // Unik ID til anmeldelsen
+    await set(ref(db, `reviews/${reviewId}`), {
+      userId: user.uid,
       reviewText: reviewText,
       timestamp: new Date().toISOString(),
-    }).then(() => {
-      // Opdater brugerens review points
-      const userRef = ref(db, 'users/' + username);
-      onValue(userRef, (snapshot) => {
-        const userData = snapshot.val();
-        const newReviewPoints = (userData.reviewPoints || 0) + 100; // Tilføj 100 points
-
-        set(ref(db, 'users/' + username), {
-          ...userData,
-          reviewPoints: newReviewPoints,
-        });
-      });
-      console.log("Review submitted successfully!");
-    }).catch((error) => {
-      console.error("Error submitting review:", error);
     });
+
+    // Hent brugerens nuværende points
+    const userRef = ref(db, `users/${user.uid}`);
+    const snapshot = await get(userRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      const newPoints = userData.reviewPoints + 100; // Tilføj 100 points
+      set(ref(db, `users/${user.uid}`), {
+        ...userData,
+        reviewPoints: newPoints,
+      });
+      Alert.alert("Succes", "Anmeldelse sendt og 100 points tilføjet!");
+    } else {
+      Alert.alert("Fejl", "Brugerdata blev ikke fundet.");
+    }
+
+    // Ryd anmeldelsesteksten
+    setReviewText('');
   };
 
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Write your review"
+        style={styles.input}
+        placeholder="Skriv din anmeldelse her..."
         value={reviewText}
         onChangeText={setReviewText}
-        style={styles.input}
       />
-      <Button title="Submit Review" onPress={handleSubmitReview} />
+      <Button title="Indsend anmeldelse" onPress={handleSubmitReview} />
     </View>
   );
 };
@@ -49,15 +62,15 @@ const ReviewActivityScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     padding: 16,
+    backgroundColor: '#fff',
   },
   input: {
     height: 100,
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    marginBottom: 10,
+    paddingLeft: 8,
   },
 });
 

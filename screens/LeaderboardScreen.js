@@ -11,13 +11,15 @@ const LeaderboardScreen = () => {
 
     onValue(usersRef, (snapshot) => {
       const data = snapshot.val();
-      const usersArray = Object.keys(data).map(key => ({
-        ...data[key],
-        userId: key
-      }));
-      // Sorter efter reviewPoints
-      usersArray.sort((a, b) => b.reviewPoints - a.reviewPoints);
-      setLeaderboard(usersArray);
+      if (data) {
+        const usersArray = Object.keys(data).map((key) => ({
+          ...data[key],
+          userId: key,
+        }));
+        // Sorter efter reviewPoints
+        usersArray.sort((a, b) => b.reviewPoints - a.reviewPoints);
+        setLeaderboard(usersArray);
+      }
     });
   }, []);
 
@@ -27,7 +29,7 @@ const LeaderboardScreen = () => {
       keyExtractor={(item) => item.userId}
       renderItem={({ item }) => (
         <View>
-          <Text>{item.username}: {item.reviewPoints} points</Text>
+          <Text>{item.username || "Ingen brugernavn"}: {item.reviewPoints || 0} points</Text>
         </View>
       )}
     />
