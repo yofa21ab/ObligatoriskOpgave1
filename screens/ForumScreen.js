@@ -2,22 +2,44 @@ import React, { useState } from 'react';
 import { View, Image, Modal, TouchableOpacity, StyleSheet } from 'react-native';
 
 const ForumScreen = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [firstModalVisible, setFirstModalVisible] = useState(false);
+  const [secondModalVisible, setSecondModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      {/* Første billede */}
+      <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
         <Image source={require('../assets/images/forum_mockup.jpg')} style={styles.image} />
       </TouchableOpacity>
 
+      {/* Modal for første billede */}
       <Modal
-        visible={modalVisible}
+        visible={firstModalVisible}
         animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={() => setFirstModalVisible(false)}
       >
-        <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.fullscreenModal}>
+        <TouchableOpacity onPress={() => setFirstModalVisible(false)} style={styles.fullscreenModal}>
           <Image
             source={require('../assets/images/forum_mockup.jpg')}
+            style={styles.fullImage}
+          />
+        </TouchableOpacity>
+      </Modal>
+
+      {/* Andet billede */}
+      <TouchableOpacity onPress={() => setSecondModalVisible(true)}>
+        <Image source={require('../assets/images/forum_chat_mockup.jpg')} style={styles.image} />
+      </TouchableOpacity>
+
+      {/* Modal for andet billede */}
+      <Modal
+        visible={secondModalVisible}
+        animationType="slide"
+        onRequestClose={() => setSecondModalVisible(false)}
+      >
+        <TouchableOpacity onPress={() => setSecondModalVisible(false)} style={styles.fullscreenModal}>
+          <Image
+            source={require('../assets/images/forum_chat_mockup.jpg')}
             style={styles.fullImage}
           />
         </TouchableOpacity>
@@ -35,6 +57,7 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 200,
+    margin: 10, // Lidt margin mellem billederne
     resizeMode: 'contain',
   },
   fullscreenModal: {
