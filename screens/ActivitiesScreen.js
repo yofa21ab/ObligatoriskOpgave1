@@ -57,5 +57,5 @@ const styles = StyleSheet.create({
   },
 });
 
-// Eksportér ActivitiesScreen komponenten til brug i andre dele af appen
+// Eksportér ActivitiesScreen komponenten
 export default ActivitiesScreen;

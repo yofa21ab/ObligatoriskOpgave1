@@ -1,55 +1,53 @@
-import React, { useState } from 'react'; // Import React and the useState hook
-import { View, Image, Modal, TouchableOpacity, StyleSheet } from 'react-native'; // Import necessary components from react-native
+import React, { useState } from 'react'; // Importér React og useState hook
+import { View, Image, Modal, TouchableOpacity, StyleSheet } from 'react-native'; // Importér nødvendige komponenter fra react-native
 
-// ForumScreen functional component
 const ForumScreen = () => {
-  // State variables to control the visibility of the modals for each image
-  const [firstModalVisible, setFirstModalVisible] = useState(false); // Modal state for the first image
-  const [secondModalVisible, setSecondModalVisible] = useState(false); // Modal state for the second image
+  // Definerer state til at kontrollere, om de to modals er synlige
+  const [firstModalVisible, setFirstModalVisible] = useState(false); // Til første billede/modal
+  const [secondModalVisible, setSecondModalVisible] = useState(false); // Til andet billede/modal
 
   return (
-    // Main container for the ForumScreen
     <View style={styles.container}>
-      {/* TouchableOpacity for the first image to trigger the first modal */}
+      {/* Første billede der kan trykkes på for at åbne modal */}
       <TouchableOpacity onPress={() => setFirstModalVisible(true)}>
-        {/* Displaying the first forum mockup image */}
+        {/* Billede der vises i Forum */}
         <Image source={require('../assets/images/forum_mockup.jpg')} style={styles.image} />
       </TouchableOpacity>
 
-      {/* Modal for the first image */}
+      {/* Modal for første billede. Vises i fuld skærm når brugeren trykker på billedet */}
       <Modal
-        visible={firstModalVisible} // Bind the modal visibility to the state of the first modal
-        animationType="slide" // Animation type when the modal appears
-        onRequestClose={() => setFirstModalVisible(false)} // Handle back button press on Android
+        visible={firstModalVisible} // Modal er synlig, hvis firstModalVisible er true
+        animationType="slide" // Modal glider ind på skærmen
+        onRequestClose={() => setFirstModalVisible(false)} // Lukker modal hvis brugeren beder om det
       >
-        {/* TouchableOpacity to close the first modal when pressed */}
+        {/* Når modal er åben, kan brugeren trykke på den for at lukke */}
         <TouchableOpacity onPress={() => setFirstModalVisible(false)} style={styles.fullscreenModal}>
-          {/* Fullscreen version of the first forum mockup image */}
+          {/* Billedet der vises i modal */}
           <Image
             source={require('../assets/images/forum_mockup.jpg')}
-            style={styles.fullImage} // Apply styles to the full image
+            style={styles.fullImage}
           />
         </TouchableOpacity>
       </Modal>
 
-      {/* TouchableOpacity for the second image to trigger the second modal */}
+      {/* Andet billede der kan trykkes på for at åbne anden modal */}
       <TouchableOpacity onPress={() => setSecondModalVisible(true)}>
-        {/* Displaying the second forum chat mockup image */}
+        {/* Andet billede der vises i Forum */}
         <Image source={require('../assets/images/forum_chat_mockup.jpg')} style={styles.image} />
       </TouchableOpacity>
 
-      {/* Modal for the second image */}
+      {/* Modal for andet billede */}
       <Modal
-        visible={secondModalVisible} // Bind the modal visibility to the state of the second modal
-        animationType="slide" // Animation type when the modal appears
-        onRequestClose={() => setSecondModalVisible(false)} // Handle back button press on Android
+        visible={secondModalVisible} // Modal er synlig, hvis secondModalVisible er true
+        animationType="slide" // Modal glider ind på skærmen
+        onRequestClose={() => setSecondModalVisible(false)} // Lukker modal ved brugeranmodning
       >
-        {/* TouchableOpacity to close the second modal when pressed */}
+        {/* Når modal er åben, kan brugeren trykke for at lukke */}
         <TouchableOpacity onPress={() => setSecondModalVisible(false)} style={styles.fullscreenModal}>
-          {/* Fullscreen version of the second forum chat mockup image */}
+          {/* Andet billede der vises i modal */}
           <Image
             source={require('../assets/images/forum_chat_mockup.jpg')}
-            style={styles.fullImage} // Apply styles to the full image
+            style={styles.fullImage}
           />
         </TouchableOpacity>
       </Modal>
@@ -57,29 +55,27 @@ const ForumScreen = () => {
   );
 };
 
-// Styles for the ForumScreen
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Allow the container to grow and fill the available space
-    justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
+    flex: 1, // Fylder hele skærmen
+    justifyContent: 'center', // Centrerer indholdet lodret
+    alignItems: 'center', // Centrerer indholdet vandret
   },
   image: {
-    width: 300, // Set the width of the images
-    height: 200, // Set the height of the images
-    margin: 10, // Add a little margin between images
-    resizeMode: 'contain', // Maintain aspect ratio within the specified dimensions
+    width: 300, // Fast bredde til billederne
+    height: 200, // Fast højde til billederne
+    margin: 10, // Lidt margin mellem billederne
+    resizeMode: 'contain', // Sørger for at billedet ikke strækkes uden for proportion
   },
   fullscreenModal: {
-    flex: 1, // Allow the modal to fill the screen
-    backgroundColor: 'black', // Set a black background for the modal
+    flex: 1, // Modal fylder hele skærmen
+    backgroundColor: 'black', // Baggrundsfarve til modalen, for at billedet skiller sig ud
   },
   fullImage: {
-    width: '100%', // Set the full width of the image
-    height: '100%', // Set the full height of the image
-    resizeMode: 'contain', // Maintain aspect ratio in fullscreen
+    width: '100%', // Billedet fylder hele modalens bredde
+    height: '100%', // Billedet fylder hele modalens højde
+    resizeMode: 'contain', // Sørger for at billedet passer uden forvrængning
   },
 });
 
-// Export the ForumScreen component for use in other parts of the app
 export default ForumScreen;

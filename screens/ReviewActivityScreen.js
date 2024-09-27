@@ -54,7 +54,7 @@ const ReviewActivityScreen = () => {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input} // Stil til tekstinput
+        style={styles.input} // Styling til tekstinput
         placeholder="Skriv din anmeldelse her..." // Pladsholdertekst
         value={reviewText} // Bind tekstinput til reviewText state
         onChangeText={setReviewText} // Opdater reviewText state når teksten ændres
@@ -89,5 +89,5 @@ const styles = StyleSheet.create({
     },
   });
 
-// Eksportér ReviewActivityScreen komponenten til brug i andre dele af appen
+// Eksportér ReviewActivityScreen komponenten
 export default ReviewActivityScreen;

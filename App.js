@@ -1,4 +1,4 @@
-// Import nødvendige moduler
+// Importerer modules
 import React, { useState, useEffect } from 'react'; // Til brug af hooks som useState og useEffect
 import { StyleSheet } from 'react-native'; // Til styles
 import { NavigationContainer } from '@react-navigation/native'; // Til navigation container
@@ -8,7 +8,7 @@ import { initializeApp } from 'firebase/app'; // Firebase app initialisering
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Firebase authentication
 import { getDatabase } from 'firebase/database'; // Firebase Realtime Database
 
-// Importer dine skærme
+// Importerer screens
 import HomeScreen from './screens/HomeScreen';
 import ActivitiesScreen from './screens/ActivitiesScreen';
 import ForumScreen from './screens/ForumScreen';
@@ -52,7 +52,6 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {/* Tab.Navigator håndterer navigationen mellem fanerne */}
       <Tab.Navigator
         screenOptions={({ route }) => ({
           // Her bestemmer vi ikonerne for hver fane
@@ -109,7 +108,6 @@ export default function App() {
   );
 }
 
-// CSS styles hvis nødvendigt
 const styles = StyleSheet.create({
   container: {
     flex: 1,
