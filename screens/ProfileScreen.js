@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; // Importer React og hooks til state og effekt
-import { View, Text, Button } from 'react-native'; // Importer nødvendige komponenter fra react-native
+import { View, Text, Button, StyleSheet } from 'react-native'; // Importer nødvendige komponenter fra react-native
 import { getDatabase, ref, onValue } from 'firebase/database'; // Importer Firebase database funktioner
 import { getAuth, signOut } from 'firebase/auth'; // Importer Firebase autentificering funktioner
 
@@ -35,18 +35,36 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View>
-      {/* Vis brugerens username, eller en besked hvis der ikke er noget */}
-      <Text>Username: {userData.username || 'Ingen brugernavn'}</Text>
-      {/* Vis brugerens review points, eller 0 hvis der ikke er nogen */}
-      <Text>Review Points: {userData.reviewPoints || 0}</Text>
-      {/* Vis brugerens badges, eller en besked hvis der ikke er nogen */}
-      <Text>Badges: {userData.badges ? userData.badges.join(", ") : 'Ingen badges'}</Text>
-      {/* Knap til at logge ud */}
+    <View style={styles.container}>
+      <Text style={styles.username}>Brugernavn: {userData.username || 'Ingen brugernavn'}</Text>
+      <Text style={styles.points}>Review Points: {userData.reviewPoints || 0}</Text>
+      <Text style={styles.badges}>Badges: {userData.badges ? userData.badges.join(", ") : 'Ingen badges'}</Text>
       <Button title="Log ud" onPress={handleLogout} />
     </View>
   );
 };
 
-// Eksportér ProfileScreen komponenten til brug i andre dele af appen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20, // Padding omkring hele containeren
+    backgroundColor: '#f8f8f8', // Lys grå baggrundsfarve
+    justifyContent: 'center', // Centrere indholdet
+  },
+  username: {
+    fontSize: 20, // Størrelse på brugernavnet
+    fontWeight: 'bold', // Gør teksten fed
+    marginBottom: 10, // Margin under brugernavnet
+  },
+  points: {
+    fontSize: 18, // Størrelse på point
+    marginBottom: 10, // Margin under point
+  },
+  badges: {
+    fontSize: 16, // Størrelse på badges
+    marginBottom: 20, // Margin under badges
+  },
+});
+
+// Eksporterer ProfileScreen komponenten
 export default ProfileScreen;

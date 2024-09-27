@@ -69,22 +69,31 @@ const RegisterScreen = ({ navigation }) => {
 
 // Styling af komponenter
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Fylder hele skærmen
-    padding: 16, // Indvendig polstring
-    backgroundColor: '#fff', // Baggrundsfarve
-  },
-  input: {
-    height: 40, // Højde på inputfeltet
-    borderColor: 'gray', // Farve på kantlinje
-    borderWidth: 1, // Tykkelse på kantlinje
-    marginBottom: 10, // Margin mellem inputfelterne
-    paddingLeft: 8, // Indvendig polstring til venstre
-  },
-  spacing: {
-    height: 20, // Juster denne værdi for at ændre afstanden mellem knapperne
-  },
-});
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f0f4f8', // Lys blå baggrund for en blødere effekt
+      justifyContent: 'center', // Centrere indholdet
+    },
+    title: {
+      fontSize: 28, // Større skriftstørrelse for titlen
+      fontWeight: 'bold', // Fed skrift
+      marginBottom: 30, // Plads under titlen
+      textAlign: 'center', // Centrerer titlen
+    },
+    input: {
+      height: 50, // Højere inputfelter for bedre brugervenlighed
+      borderColor: 'gray', // Borderfarve
+      borderWidth: 1, // Borderbredde
+      borderRadius: 10, // Rundede hjørner
+      marginBottom: 20, // Afstand under inputfeltet
+      paddingHorizontal: 15, // Indvendig afstand til venstre og højre
+      backgroundColor: '#fff', // Hvid baggrund for inputfelterne
+    },
+    spacing: {
+      height: 20, // Justerbar afstand mellem knapper
+    },
+  });
 
 // Eksporterer RegisterScreen komponenten
 export default RegisterScreen;

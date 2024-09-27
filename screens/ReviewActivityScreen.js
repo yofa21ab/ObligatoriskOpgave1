@@ -66,19 +66,28 @@ const ReviewActivityScreen = () => {
 
 // Stil til komponenterne
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Fuld højde
-    padding: 16, // Indvendig polstring
-    backgroundColor: '#fff', // Baggrundsfarve
-  },
-  input: {
-    height: 100, // Højde på inputfeltet
-    borderColor: 'gray', // Borderfarve
-    borderWidth: 1, // Borderbredde
-    marginBottom: 10, // Margin under inputfeltet
-    paddingLeft: 8, // Indvendig polstring til venstre
-  },
-});
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f8f8f8', // Lys grå baggrund
+      justifyContent: 'center', // Centrere indholdet
+    },
+    title: {
+      fontSize: 24, // Størrelse på titlen
+      fontWeight: 'bold', // Fed skrifttype
+      marginBottom: 20, // Afstand under titlen
+      textAlign: 'center', // Centrerer titlen
+    },
+    input: {
+      height: 100, // Højde på inputfeltet
+      borderColor: 'gray', // Borderfarve
+      borderWidth: 1, // Borderbredde
+      borderRadius: 8, // Rundede hjørner
+      marginBottom: 20, // Afstand under inputfeltet
+      padding: 10, // Indvendig afstand
+      backgroundColor: '#fff', // Hvid baggrund
+    },
+  });
 
 // Eksportér ReviewActivityScreen komponenten til brug i andre dele af appen
 export default ReviewActivityScreen;

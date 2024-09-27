@@ -44,22 +44,36 @@ const LoginScreen = ({ navigation }) => {
 
 // Styling af komponenter
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, // Fylder hele skærmen
-    justifyContent: 'center', // Centerer indholdet lodret
-    padding: 16, // Indvendig polstring
-  },
-  input: {
-    height: 40, // Højde på inputfeltet
-    borderColor: 'gray', // Farve på kantlinje
-    borderWidth: 1, // Tykkelse på kantlinje
-    marginBottom: 12, // Margin mellem inputfelterne
-    paddingHorizontal: 8, // Indvendig polstring til venstre og højre
-  },
-  error: {
-    color: 'red', // Farve til fejlmeddelelse
-  },
-});
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#f0f4f8', // Lys blå baggrund for en blødere effekt
+      justifyContent: 'center', // Centrere indholdet
+    },
+    title: {
+      fontSize: 28, // Større skriftstørrelse for titlen
+      fontWeight: 'bold', // Fed skrift
+      marginBottom: 30, // Plads under titlen
+      textAlign: 'center', // Centrerer titlen
+    },
+    input: {
+      height: 50, // Højere inputfelter for bedre brugervenlighed
+      borderColor: 'gray', // Borderfarve
+      borderWidth: 1, // Borderbredde
+      borderRadius: 10, // Rundede hjørner
+      marginBottom: 20, // Afstand under inputfeltet
+      paddingHorizontal: 15, // Indvendig afstand til venstre og højre
+      backgroundColor: '#fff', // Hvid baggrund for inputfelterne
+    },
+    error: {
+      color: 'red', // Rød farve til fejlmeddelelser
+      marginTop: 10, // Plads over fejlmeddelelser
+      textAlign: 'center', // Centrerer fejlmeddelelsen
+    },
+    spacing: {
+      height: 20, // Justerbar afstand mellem knapper
+    },
+  });
 
 // Eksporterer LoginScreen komponenten
 export default LoginScreen;
